@@ -15,7 +15,7 @@ class Board(models.Model):
     name = models.CharField(max_length=64)
     date_created = models.DateTimeField(default=timezone.now)
     is_private = models.BooleanField(default=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='authored_boards')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_boards')
     theme = models.ForeignKey('Theme', on_delete=models.CASCADE, related_name='boards')
 
     def __str__(self):
@@ -40,8 +40,8 @@ class Color(models.Model):
 
 class Column(models.Model):
     name = models.CharField(max_length=64)
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='columns')
-    color = models.ForeignKey(Color, on_delete=models.CASCADE, related_name='column')
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='board_columns')
+    color = models.ForeignKey(Color, on_delete=models.CASCADE, related_name='color_columns')
 
     def __str__(self):
         return f"<Column({self.id}, {self.name})>"
@@ -77,8 +77,8 @@ class TgUser(models.Model):
 
 
 class Collaborator(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='collaborators')
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='collaborators')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_collaborators')
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='board_collaborators')
 
     def __str__(self):
         return f"<Collaborator({self.user.id}, {self.board.id})>"
