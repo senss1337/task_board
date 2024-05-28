@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Авторизация{% endblock %}
+{% block header %}
+<h1>Авторизация</h1>
+{% endblock %}
+
+{% block content %}
+
+{% for message in get_flashed_messages(request) %}
+<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
+{% endfor %}
+
+<div class="card border-primary mb-3" style="width: 22rem;">
+    <div class="card-body">
+        <form action="/login" class="form-horizontal" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="username" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label" for="remember_me">
+                    Запомнить меня
+                </label>
+                <input class="form-check-input" type="checkbox" value="True" id="remember_me" name="remember_me">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    </div>
+</div>
+
+<a href="/login_google">Войти с помощью Google</a>
+{% endblock %}

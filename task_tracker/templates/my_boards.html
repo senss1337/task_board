@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Мои доски{% endblock %}
+{% block header %}
+<h1>Мои доски</h1>
+{% endblock %}
+
+{% block content %}
+
+{% for message in get_flashed_messages(request) %}
+<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
+{% endfor %}
+
+{% for board in boards %}
+<a href='{{ url_for("view_board", id=board.id) }}'>
+    <div class="card border-primary mb-3" style="max-width: 18rem;">
+        <div class="card">
+            <div class="card-body">
+                <a href="{{ url_for('view_board', id=board.id) }}">
+                    {{ board.name }}
+                </a>
+                <a href="{{ url_for('delete_board', id=board.id) }}">
+                    <button type="submit" class="btn btn-primary float-end">Удалить</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</a>
+
+{% endfor %}
+
+
+{% endblock %}

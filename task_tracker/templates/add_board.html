@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Добавить доску{% endblock %}
+
+{% block header %}
+<h1>Добавить новую доску</h1>
+{% endblock %}
+
+{% block content %}
+{% for message in get_flashed_messages(request) %}
+<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
+{% endfor %}
+
+
+<div class="card w-50">
+    <div class="card-body">
+        {% block form_info %}
+        <h5 class="card-title">Создать новую доску</h5>
+        <p class="card-text">Здесь вы можете создать новую доску</p>
+        {% endblock %}
+        <form action="{% block form_link %}/add_board{% endblock %}" method="post">
+            <label for="name">Название доски</label>
+            <input type="text" name="name" id="name" required {% if board %}value="{{board.name}}"{% endif %}>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="True" id="is_private" name="is_private" {% if board and board.is_private%}checked{% endif %}>
+                <label class="form-check-label" for="is_private">
+                    Приватная доска
+                </label>
+            </div>
+            <label for="theme_id">Тематика</label>
+            <select class="form-control form-control-sm" id="theme_id" name="theme_id" required>
+                {% for theme in themes %}
+                <option value={{theme.id}}>{{ theme.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary">{% block button_name %}Создать{% endblock %}</button>
+        </form>
+    </div>
+</div>
+{% block content_add %}{% endblock %}
+{% endblock %}

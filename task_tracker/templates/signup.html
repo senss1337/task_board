@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Регистрация{% endblock %}
+{% block header %}
+<h1>Регистрация</h1>
+{% endblock %}
+
+{% block content %}
+
+{% for message in get_flashed_messages(request) %}
+<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
+{% endfor %}
+
+<div class="card border-primary mb-3" style="width: 22rem;">
+    <div class="card-body">
+        <form action="/sign_up" role="form" class="form-horizontal" method="POST">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password1" name="password1" required>
+            </div>
+            <div class="mb-3">
+                <label for="password2" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password2" name="password2" required>
+            </div>
+            <!--<input type="submit" class="btn btn-primary" value={% block button_name %}"Создать"{% endblock %}/>-->
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
+<a href="/login_google">Войти с помощью Google</a>
+{% endblock %}
