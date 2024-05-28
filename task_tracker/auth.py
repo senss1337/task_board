@@ -28,7 +28,8 @@ def user_login(request):
         else:
             return render(request, 'login.html', {'error_message': 'Invalid username or password.'})
     else:
-        return render(request, 'login.html')
+        auth_info = request.COOKIES.get("auth_info")
+        return render(request, 'login.html', {'auth_info': auth_info})
 
 
 def user_logout(request):

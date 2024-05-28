@@ -62,15 +62,14 @@ urlpatterns = [
     path('edit_column/<int:pk>/', EditColumnView.as_view(), name='edit_column'),
 
     path('sign_up/', auth.sign_up, name='sign_up'),
+    path('sign_up', auth.sign_up, name='sign_up'),
     path('login/', auth.user_login, name='login'),
+    path('login', auth.user_login, name='login'),
     path('logout/', auth.user_logout, name='logout'),
     path('edit/', auth.edit_profile, name='edit_profile'),
 
     path('subscribe_on_events/', bot.subscribe_on_events, name='subscribe_on_events'),
     path('unsubscribe_from_events/', bot.unsubscribe_from_events, name='unsubscribe_from_events'),
-
-    path('accounts/', include('allauth.urls')),
-
 ]
 
 websocket_urlpatterns = [

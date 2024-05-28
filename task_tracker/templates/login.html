@@ -6,13 +6,11 @@
 
 {% block content %}
 
-{% for message in get_flashed_messages(request) %}
-<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
-{% endfor %}
-
 <div class="card border-primary mb-3" style="width: 22rem;">
     <div class="card-body">
         <form action="/login" class="form-horizontal" method="POST">
+            {% csrf_token %}
+
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" name="username" id="username" required>

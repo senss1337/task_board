@@ -6,13 +6,11 @@
 
 {% block content %}
 
-{% for message in get_flashed_messages(request) %}
-<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
-{% endfor %}
-
 <div class="card border-primary mb-3" style="width: 22rem;">
     <div class="card-body">
-        <form action="/sign_up" role="form" class="form-horizontal" method="POST">
+        <form action="/sign_up/" role="form" class="form-horizontal" method="POST">
+            {% csrf_token %}
+
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" required>

@@ -2,12 +2,12 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
-from .models import CustomUser
+from .models import User
 from .serializers import UserRegistrationSerializer
 
 
 class UserViewSet(CreateModelMixin, GenericViewSet):
-    queryset = CustomUser.objects.all().order_by("-id")
+    queryset = User.objects.all().order_by("-id")
 
     def get_serializer_class(self):
         if self.action == "create":

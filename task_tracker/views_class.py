@@ -6,7 +6,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
-from core.models import Board, Collaborator, Color, Column, Task, Tag, TgUser, CustomUser, Theme
+from core.models import Board, Collaborator, Color, Column, Task, Tag, TgUser, User, Theme
 from task_tracker.bot import send_notification, task_added_message, task_updated_message, as_collaborator_added_message, \
     collaborator_deleted_message
 from task_tracker.forms import BoardForm, TaskForm, CollaboratorForm, ThemeForm, ColumnForm
@@ -199,7 +199,7 @@ class AddCollaboratorView(LoginRequiredMixin, CreateView):
             return super().form_invalid(form)
         new_collaborator = form.save(commit=False)
         new_collaborator.board = board
-        new_collaborator.user = CustomUser.objects.get(username=form.cleaned_data['username'])
+        new_collaborator.user = User.objects.get(username=form.cleaned_data['username'])
         new_collaborator.save()
         tg_user = TgUser.objects.filter(user_id=new_collaborator.user.id).first()
         if tg_user:
@@ -328,7 +328,7 @@ class TaskConsumer(AsyncWebsocketConsumer):
 
 def delete_test_users(request):
     """Удаление тестовых пользователей"""
-    users = CustomUser.objects.filter(username__in=["TestUser1", "TestUser2", "TestUser3"])
+    users = User.objects.filter(username__in=["TestUser1", "TestUser2", "TestUser3"])
     theme = Theme.objects.filter(name="TestTheme1").first()
 
     if theme:

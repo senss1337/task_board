@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 
-from core.models import Board, Task, Tag, Theme, Column, CustomUser
+from core.models import Board, Task, Tag, Theme, Column, User
 
 
 class BoardForm(forms.ModelForm):
@@ -28,7 +28,7 @@ class CollaboratorForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        user = CustomUser.objects.filter(username=username).first()
+        user = User.objects.filter(username=username).first()
         if not user:
             raise ValidationError('User does not exist')
         return username
@@ -60,7 +60,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Enter a valid email address.')
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ('username', 'email', 'password1', 'password2')
 
 
@@ -72,5 +72,5 @@ class LoginForm(forms.Form):
 
 class UserEditForm(UserChangeForm):
     class Meta:
-        model = CustomUser
+        model = User
         fields = ('username', 'email')

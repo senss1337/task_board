@@ -6,10 +6,6 @@
 
 {% block content %}
 
-{% for message in get_flashed_messages(request) %}
-<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
-{% endfor %}
-
 <div class="row">
     <div class="card border-secondary mb-3" style="max-width: 30rem;">
         <div class="card-body text-secondary">

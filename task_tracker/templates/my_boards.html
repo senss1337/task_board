@@ -6,10 +6,6 @@
 
 {% block content %}
 
-{% for message in get_flashed_messages(request) %}
-<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
-{% endfor %}
-
 {% for board in boards %}
 <a href='{{ url_for("view_board", id=board.id) }}'>
     <div class="card border-primary mb-3" style="max-width: 18rem;">

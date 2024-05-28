@@ -5,9 +5,7 @@
 {% endblock %}
 
 {% block content %}
-{% for message in get_flashed_messages(request) %}
-<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
-{% endfor %}
+
 
 <style>
     .btn-circle {
@@ -19,6 +17,7 @@
         padding-right: 0;
         font-size: 16px;
     }
+
 </style>
 
 <div class="card border-primary mb-3" style="width: 22rem;">

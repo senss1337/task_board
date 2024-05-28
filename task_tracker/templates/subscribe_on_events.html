@@ -6,14 +6,11 @@
 
 {% block content %}
 
-{% for message in get_flashed_messages(request) %}
-<div class="{{ message.category }}" role="alert">{{ message.message }}</div>
-{% endfor %}
-
 <div class="card border-primary mb-3" style="width: 22rem;">
     <div class="card-body">
         <form action="{{ url_for('subscribe_on_events') }}" role="form" class="form-horizontal" method="POST">
-            <p>Для того, чтобы подписаться на обновления, введите свой Telegram id (узнать <a href="https://t.me/getmyid_bot">здесь</a>), затем перейдите в <a
+            <p>Для того, чтобы подписаться на обновления, введите свой Telegram id (узнать <a
+                    href="https://t.me/getmyid_bot">здесь</a>), затем перейдите в <a
                     href="https://t.me/trello_updates_bot">бота</a> и начните
                 общение с ним</p>
             <div class="mb-3">
